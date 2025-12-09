@@ -13,6 +13,7 @@ type config struct {
 	Client   pokeapi.Client
 	Next     *string
 	Previous *string
+	Pokedex  map[string]pokeapi.Pokemon
 }
 
 func startRepl(conf *config) {
@@ -28,11 +29,15 @@ func startRepl(conf *config) {
 			continue
 		}
 		command := input[0]
+		arg := ""
+		if len(input) > 1 {
+			arg = input[1]
+		}
 
 		if val, ok := commands[command]; !ok {
 			fmt.Printf("Unknown command\n")
 		} else {
-			val.callback(conf)
+			val.callback(conf, arg)
 		}
 	}
 
