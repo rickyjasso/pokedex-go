@@ -6,11 +6,6 @@ type cliCommand struct {
 	callback    func(c *config) error
 }
 
-type config struct {
-	Next     any
-	Previous any
-}
-
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
 		"exit": {
@@ -25,12 +20,12 @@ func getCommands() map[string]cliCommand {
 		},
 		"map": {
 			name:        "map",
-			description: "Lists 20 areas",
+			description: "Lists the next page of location areas",
 			callback:    commandMap,
 		},
 		"mapb": {
 			name:        "mapb",
-			description: "Lists previous 20 areas",
+			description: "Lists previous page of location areas",
 			callback:    commandMapb,
 		},
 	}
