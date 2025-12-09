@@ -11,6 +11,11 @@ func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	commands := getCommands()
+	conf := config{
+		Next:     nil,
+		Previous: nil,
+	}
+
 	for {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
@@ -19,10 +24,11 @@ func startRepl() {
 			continue
 		}
 		command := input[0]
+
 		if val, ok := commands[command]; !ok {
-			fmt.Printf("Unknown command")
+			fmt.Printf("Unknown command\n")
 		} else {
-			val.callback()
+			val.callback(&conf)
 		}
 	}
 
